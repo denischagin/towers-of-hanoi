@@ -4,19 +4,19 @@ COLORS = [i + 31 for i in range(5)] * 4
 
 
 def input_params_and_start_alg():
-    time_variable = 6
+    temporary_variable = 6
     disks = int(input('Введите количество дисков от 3 до 20: '))
     towers = int(input('Введите количество башен от 3 до 10: '))
     start_t = int(input('Введите номер начальной башни: '))
     finish_t = int(input('Введите номер конечной башни: '))
     while True:
-        temp = time_variable - start_t - finish_t
+        temp = temporary_variable - start_t - finish_t
         if temp <= 0 or temp == start_t or temp == finish_t:
-            time_variable += 1
+            temporary_variable += 1
         else:
             break
     towers = generate_start_towers(disks, towers, start_t)
-    hanoi_algorithm(disks, start_t, finish_t, towers, time_variable, disks)
+    hanoi_algorithm(disks, start_t, finish_t, towers, temporary_variable, disks)
 
 
 def generate_start_towers(n_disks, n_towers, start):
@@ -41,10 +41,12 @@ def print_towers(towers, count_disks):
     for i in reversed(range(count_disks)):
         for j in range(len(towers)):
             try:
-                color_code = f'\033[{COLORS[towers[j][i] - 1]}m ' + '{:^3}'
-                print(color_code.format(towers[j][i]), end='')
+                string = int(towers[j][i]) * '■'
+                color_code = f'\033[{COLORS[towers[j][i] - 1]}m ' + '{:<' + str(count_disks) + '}'
+                print(color_code.format(string), end='')
             except IndexError:
-                print('\033[37m {:^3}'.format('|'), end='')
+                format_string = '\033[37m {:<' + str(count_disks) + '}'
+                print(format_string.format('|'), end='')
         print()
     print()
     keyboard.wait("Enter")
