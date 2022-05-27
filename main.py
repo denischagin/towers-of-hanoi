@@ -5,50 +5,18 @@ COLORS = [i + 31 for i in range(5)] * 4
 
 def input_params_and_start_alg():
     time_variable = 6
+    disks = int(input('Введите количество дисков от 3 до 20: '))
+    towers = int(input('Введите количество башен от 3 до 10: '))
+    start_t = int(input('Введите номер начальной башни: '))
+    finish_t = int(input('Введите номер конечной башни: '))
     while True:
-        disks = input('Введите количество дисков от 3 до 20: ')
-        try:
-            if not (20 >= int(disks) >= 3):
-                raise
-        except(Exception,):
-            print('Введены неправильные данные')
-            continue
-        break
-    while True:
-        towers = input('Введите количество башен от 3 до 10: ')
-        try:
-            if not (10 >= int(towers) >= 3):
-                raise
-        except(Exception,):
-            print('Введены неправильные данные')
-            continue
-        break
-    while True:
-        start_t = input('Введите номер начальной башни: ')
-        try:
-            if not (int(towers) >= int(start_t) >= 1):
-                raise
-        except(Exception,):
-            print('Введены неправильные данные ')
-            continue
-        break
-    while True:
-        finish_t = input('Введите номер конечной башни: ')
-        try:
-            if not (int(towers) >= int(finish_t) >= 1 and int(finish_t) != int(start_t)):
-                raise
-        except(Exception,):
-            print('Введены неправильные данные ')
-            continue
-        break
-    while True:
-        temp = time_variable - int(start_t) - int(finish_t)
-        if temp <= 0 or temp == int(start_t) or temp == int(finish_t):
+        temp = time_variable - start_t - finish_t
+        if temp <= 0 or temp == start_t or temp == finish_t:
             time_variable += 1
         else:
             break
-    towers = generate_start_towers(int(disks), int(towers), int(start_t))
-    hanoi_algorithm(int(disks), int(start_t), int(finish_t), towers, time_variable, int(disks))
+    towers = generate_start_towers(disks, towers, start_t)
+    hanoi_algorithm(disks, start_t, finish_t, towers, time_variable, disks)
 
 
 def generate_start_towers(n_disks, n_towers, start):
