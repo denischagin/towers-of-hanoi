@@ -1,5 +1,3 @@
-import keyboard
-
 COLORS = [i + 31 for i in range(5)] * 4
 
 
@@ -38,6 +36,7 @@ def hanoi_algorithm(n, start, finish, towers, temporary_variable, count_disks):
 
 
 def print_towers(towers, count_disks):
+    input()
     for i in reversed(range(count_disks)):
         for j in range(len(towers)):
             try:
@@ -49,7 +48,6 @@ def print_towers(towers, count_disks):
                 print(format_string.format('|'), end='')
         print()
     print()
-    keyboard.wait("Enter")
 
 
 if __name__ == '__main__':
